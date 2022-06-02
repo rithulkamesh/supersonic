@@ -6,5 +6,8 @@ authors = ["Rithul Kamesh <captain@hackplane.io>"]
 
 [dependencies]
 rocket = "0.5.0-rc.2"
-lettre = "0.9"
-lettre_email = "0.9"
+lettre = "0.10.0-rc.6"
+sqlx = { version = "0.5", features = [ "runtime-async-std-native-tls", "mysql" ] }
+async-std = { version = "1", features = [ "attributes" ] }
+dotenv = "0.15.0"
+dotenv_codegen = "0.15.0"
