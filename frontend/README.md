@@ -1,1 +1,1 @@
-# Just boring boilerplate react code
+# Just boring nextjs stuff dont even bother
