@@ -1,20 +1,27 @@
 #[macro_use]
-extern crate dotenv_codegen;
+extern crate diesel;
+extern crate dotenv;
 
 use dotenv::dotenv;
-extern crate dotenv;
+use std::env;
 use lettre::{ SmtpTransport };
-use sqlx::mysql::MySqlPoolOptions;
+use diesel::prelude::*;
+use diesel::mysql::MysqlConnection;
 
 #[async_std::main]
-async fn main() -> Result<(), sqlx::Error> {
+async fn main() {
     dotenv().ok();
 
     let _mailer = SmtpTransport::unencrypted_localhost();
-    let pool = MySqlPoolOptions::new().connect(dotenv!("DATABASE_URL")).await?;
+    let _conn = connect_db();
+}
 
-    let q= sqlx::query("show tables;").execute(&pool).await?;
-    eprintln!("{:?}", q);
+pub fn connect_db() -> MysqlConnection {
+    dotenv().ok();
 
-    Ok(())
+    let database_url = env::var("DATABASE_URL")
+        .expect("DATABASE_URL must be set");
+
+    MysqlConnection::establish(database_url.as_str())
+        .expect(&format!("Error connecting to {}", database_url))
 }

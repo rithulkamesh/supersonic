@@ -1,0 +1,4 @@
+CREATE TABLE config (
+  property VARCHAR(200) PRIMARY KEY,
+  val VARCHAR(200) NOT NULL
+)

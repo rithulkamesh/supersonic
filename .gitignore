@@ -4,3 +4,5 @@ package-lock.json
 yarn.lock
 Cargo.lock
 .env
+.next
+.DS_Store
